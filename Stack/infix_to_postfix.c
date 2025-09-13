@@ -105,7 +105,7 @@ int main() {
     fgets(infix, MAX, stdin);
 
     // Remove newline
-    size_t len = strlen(infix);
+    int len = strlen(infix);
     if (len > 0 && infix[len - 1] == '\n')
         infix[len - 1] = '\0';
 
