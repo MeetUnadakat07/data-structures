@@ -128,6 +128,29 @@ struct node *deleteAtPosition(struct node *head, int position) {
     }
 }
 
+struct node *clearList(struct node *head) {
+    struct node *temp = head;
+    while(temp != NULL) {
+        temp = temp -> link;
+        free(head);
+        head = temp;
+    }
+    return head;
+}
+
+struct node *reverseList(struct node *head) {
+    struct node *prev = NULL;
+    struct node *next = NULL;
+    while(head != NULL) {
+        next = head -> link;
+        head -> link = prev;
+        prev = head;
+        head = next;
+    }
+    head = prev;
+    return head;
+}
+
 int main() {
     struct node *head = malloc(sizeof(struct node));
     head -> data = 45;
@@ -154,5 +177,16 @@ int main() {
 
     head = deleteAtPosition(head, 2);
     printData(head);
+
+    insertAtEnd(head, 73);
+    printData(head);
+
+    head = reverseList(head);
+    printData(head);
+
+    head = clearList(head);
+    if(head == NULL) {
+        printf("The list is deleted successfully\n");
+    }
     return 0;
 }
