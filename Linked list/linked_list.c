@@ -56,27 +56,41 @@ struct node *insertAtBegining(struct node *head, int data) {
     return temp;
 }
 
-void *insertAtPosition(struct node *head, int data, int position) {
-    struct node *ptr = head;
+struct node *insertAtPosition(struct node *head, int data, int position) {
+
+    if(position < 1) {
+        printf("Invalid position.\n");
+        return head;
+    }
+
+    if(position == 1 || head == NULL) {
+        insertAtBegining(head, data);
+    }
+
     struct node *temp = malloc(sizeof(struct node));
+    if(temp == NULL) {
+        printf("Failed to allocate memory.\n");
+        exit(1);
+    }
+
     temp -> data = data;
     temp -> link = NULL;
 
-    if(position == 1) {
-        temp -> link = head;
-        head = temp;
-        return head;
-    } else if(head == NULL) {
-        insertAtBegining(head, data);
-    } else {
-        while(position != 2) {
-            ptr = ptr -> link;
-            position--;
-        }
-        temp -> link = ptr -> link;
-        ptr -> link = temp;
+    struct node *ptr = head;
+    for(int i = 0; i <position - 1 && ptr != NULL; i++) {
+        ptr = ptr -> link;
     }
-}
+
+    if(ptr == NULL) {
+        printf("position out of bounds.\n");
+        free(temp);
+        return head;
+    }
+
+    temp -> link = ptr -> link;
+    ptr -> link = temp;
+    return head;
+} 
 
 struct node *deleteAtBegining(struct node *head) {
     if(head == NULL) {
