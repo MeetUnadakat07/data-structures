@@ -101,6 +101,60 @@ void insert(struct node *root, int key) {
     }
 }
 
+struct node *inorderPredecessor(struct node *root) {
+    root = root -> left;
+    while(root -> right != NULL) {
+        root = root -> right;
+    }
+    return root;
+}
+
+struct node *deleteNode(struct node *root, int value) {
+    struct node *iPre;
+
+    if (root == NULL) {
+        return NULL;
+    }
+
+    // If the node to delete is in the left subtree
+    if (value < root->data) {
+        root->left = deleteNode(root->left, value);
+    }
+    // If the node to delete is in the right subtree
+    else if (value > root->data) {
+        root->right = deleteNode(root->right, value);
+    }
+    // Node found
+    else {
+        // Case 1: Node has no children
+        if (root->left == NULL && root->right == NULL) {
+            free(root);
+            return NULL;
+        }
+        // Case 2: Node has only right child
+        else if (root->left == NULL) {
+            struct node *temp = root->right;
+            free(root);
+            return temp;
+        }
+        // Case 3: Node has only left child
+        else if (root->right == NULL) {
+            struct node *temp = root->left;
+            free(root);
+            return temp;
+        }
+        // Case 4: Node has two children
+        else {
+            iPre = inorderPredecessor(root);
+            root->data = iPre->data;
+            root->left = deleteNode(root->left, iPre->data);
+        }
+    }
+
+    return root;
+}
+
+
 int main() {
     struct node *p = createNode(5);
     struct node *p1 = createNode(3);
@@ -112,6 +166,14 @@ int main() {
     p -> right = p4;
     p1 -> left = p2;
     p1 -> right = p3;
+
+    /*
+        5
+       / \
+      3   6
+     / \
+    1   4
+    */
 
     preorder(p);
     printf("\n");
@@ -139,6 +201,8 @@ int main() {
         printf("Element not found\n");
     }
 
-    insert(p, 6);
-    printf("%d", p -> right -> right -> data);
+    inorder(p);
+    printf("\n");
+    deleteNode(p, 6);
+    inorder(p);
 }
