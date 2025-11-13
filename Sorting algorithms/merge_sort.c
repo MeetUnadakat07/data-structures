@@ -3,6 +3,7 @@
 #define MAX 100
 
 void merge(int arr[], int st, int mid, int end) {
+    // Merging the arrays in sorted manner
     int temp[MAX];
     int i = st, j = mid + 1;
     int idx = 0;
@@ -27,6 +28,7 @@ void merge(int arr[], int st, int mid, int end) {
 }
 
 void mergeSort(int arr[], int st, int end) {
+    // Splitting the array into two halves and sorting it wrt the elements and then merging it
     if(st < end) {
         int mid = st + (end - st) / 2;
         

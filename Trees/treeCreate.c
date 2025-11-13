@@ -21,7 +21,7 @@ void preorder(struct node *root) {
         preorder(root -> left);
         preorder(root -> right);
     }
-};
+}
 
 void postorder(struct node *root) {
     if(root != NULL) {
@@ -29,7 +29,7 @@ void postorder(struct node *root) {
         postorder(root -> right);
         printf("%d ", root -> data);
     }
-};
+}
 
 void inorder(struct node *root) {
     if(root != NULL) {
@@ -37,7 +37,7 @@ void inorder(struct node *root) {
         printf("%d ", root -> data);
         inorder(root -> right);
     }
-};
+}
 
 int isBST(struct node *root) {
     static struct node *prev = NULL;
@@ -85,7 +85,7 @@ void insert(struct node *root, int key) {
     while(root != NULL) {
         prev = root;
         if(key == root -> data) {
-            printf("Cannot inseert, %d already in tree\n", key);
+            printf("Cannot insert, %d already in tree\n", key);
             return;
         } else if(key < root -> data) {
             root = root -> left;
@@ -153,7 +153,6 @@ struct node *deleteNode(struct node *root, int value) {
 
     return root;
 }
-
 
 int main() {
     struct node *p = createNode(5);

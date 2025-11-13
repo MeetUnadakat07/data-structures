@@ -8,6 +8,7 @@ void swap(int *a, int *b) {
 }
 
 int partition(int arr[], int st, int end) {
+    // Partition the array along the pivot element
     int idx = st - 1;
     int pivot = arr[end];
 
@@ -24,6 +25,7 @@ int partition(int arr[], int st, int end) {
 }
 
 void quickSort(int arr[], int st, int end) {
+    // Sorting similar to merge sort but not from middle but from a pivot element and elements smaller than pivot at the left and greater at the right
     if (st < end) {
         int pivotIdx = partition(arr, st, end);
 
