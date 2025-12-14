@@ -89,7 +89,7 @@ int main() {
     printf("Enter the source vertex: ");
     scanf("%d", &s);
 
-    printf("The dfs traversal is:\n");
+    printf("The bfs traversal is:\n");
     bfs(s, n);
     return 0;
 }
