@@ -34,11 +34,11 @@ void dequeue() {
         return;
     }
     printf("%d is removed from the queue\n", queue[front]);
-    front++;
     if (front == rear) {
         front = rear = -1;
+    } else {
+        front++;
     }
-    
 }
 
 void display() {
