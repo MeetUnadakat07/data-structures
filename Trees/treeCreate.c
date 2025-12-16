@@ -202,6 +202,6 @@ int main() {
 
     inorder(p);
     printf("\n");
-    deleteNode(p, 6);
+    p = deleteNode(p, 6);
     inorder(p);
 }
