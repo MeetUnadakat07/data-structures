@@ -80,25 +80,16 @@ struct node *searchIter(struct node *root, int key) {
     return NULL;
 }
 
-void insert(struct node *root, int key) {
-    struct node *prev = NULL;
-    while(root != NULL) {
-        prev = root;
-        if(key == root -> data) {
-            printf("Cannot insert, %d already in tree\n", key);
-            return;
-        } else if(key < root -> data) {
-            root = root -> left;
-        } else {
-            root = root -> right;
-        }
-    } 
-    struct node *new = createNode(key);
-    if(key < prev -> data) {
-        prev -> left = new;
-    } else {
-        prev -> right = new;
-    }
+struct node* insert(struct node* root, int key) {
+    if (root == NULL)
+        return createNode(key);
+
+    if (key < root->data)
+        root->left = insert(root->left, key);
+    else if (key > root->data)
+        root->right = insert(root->right, key);
+
+    return root;
 }
 
 struct node *inorderPredecessor(struct node *root) {
@@ -203,5 +194,8 @@ int main() {
     inorder(p);
     printf("\n");
     p = deleteNode(p, 6);
+    inorder(p);
+    printf("\n");
+    p = insert(p, 7);
     inorder(p);
 }
