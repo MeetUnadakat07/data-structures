@@ -38,7 +38,7 @@ int main() {
     int arr[] = {5, 2, 6, 4, 1, 3};
     int n = sizeof(arr) / sizeof(int);
 
-    quickSort(arr, 0, n);
+    quickSort(arr, 0, n - 1);
     for(int i = 0; i < 6; i++) {
         printf("%d ", arr[i]);
     }
