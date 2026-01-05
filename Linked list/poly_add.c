@@ -8,7 +8,7 @@ struct node {
 };
 
 struct node *insert(struct node *head, int coeff, int index) {
-    struct node *newNode = malloc(sizeof *newNode);
+    struct node *newNode = malloc(sizeof(struct node));
     if (newNode == NULL) {
         printf("Memory allocation failed\n");
         return head;
